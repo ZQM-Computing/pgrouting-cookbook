@@ -1,0 +1,19 @@
+[project]
+name = "pgrouting-patterns"
+version = "0.1.0"
+description = "pgRouting patterns for PostGIS network analysis"
+readme = "README.md"
+requires-python = ">=3.11"
+license = {text = "MIT"}
+authors = [{name = "ZQM Computing", email = "zqmcomputing@gmail.com"}]
+keywords = ["pgrouting", "postgis", "routing", "network-analysis", "sql"]
+
+[project.urls]
+Homepage = "https://github.com/ZQM-Computing/pgrouting-patterns"
+
+[tool.ruff]
+line-length = 120
+target-version = "py311"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
