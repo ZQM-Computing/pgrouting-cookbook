@@ -1,6 +1,4 @@
-#!/usr/bin/env python3
 """Tests for pgrouting-patterns."""
-import subprocess
 from pathlib import Path
 
 EXAMPLES_DIR = Path(__file__).parent.parent / "examples"
