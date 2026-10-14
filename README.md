@@ -1,48 +1,83 @@
 # pgRouting Patterns
 
-Production-tested pgRouting patterns for PostGIS network analysis.
+[![CI](https://github.com/ZQM-Computing/pgrouting-patterns/actions/workflows/ci.yml/badge.svg)](https://github.com/ZQM-Computing/pgrouting-patterns/actions/workflows/ci.yml)
+
+Production-tested pgRouting patterns for PostGIS network analysis — shortest paths, driving distances, isochrones, and traffic-aware routing, all on synthetic data you can run locally.
 
 ## Who this is for
 
-GIS analysts, logistics planners, and urban planners.
+GIS analysts, logistics planners, and anyone who needs routing answers out of a PostGIS database: pgRouting turns a table of road segments into a routable network, and these patterns show the queries that matter in production.
 
-## What's inside
+## Prerequisites
 
-- `examples/` — Runnable SQL scripts with Docker setup
-- `tests/` — Validation tests for each pattern
+- Docker and Docker Compose (recommended — the repo ships a `docker-compose.yml` with PostgreSQL 15, PostGIS 3.4, and pgRouting 3.6.0), or
+- Your own PostgreSQL 15+ with PostGIS 3.4+ and pgRouting 3.6+
+- `psql` client
+
+## Quickstart
+
+```bash
+# Start the database (credentials are in docker-compose.yml)
+docker compose up -d
+
+# Run the Dijkstra example against it
+psql -h localhost -U gis -d gis -f examples/01-dijkstra/run.sql
+```
+
+Each example is a single self-contained `run.sql`: it builds a small synthetic network, runs the pgRouting function, and prints the result. Point `psql` at any example directory's `run.sql` to try it.
 
 ## Patterns
 
-| # | Pattern | Description |
-|---|---------|-------------|
-| 1 | Dijkstra | Shortest path by cost |
-| 2 | A* | Heuristic shortest path |
-| 3 | TSP | Traveling Salesman Problem |
-| 4 | Driving distance | Cost matrix generation |
-| 5 | Isochrone | Reachability polygons |
-| 6 | Network prep | Topology preparation |
-| 7 | Turn restrictions | No-left-turn, no-u-turn penalties |
-| 8 | Multi-criteria | Time + distance + safety routing |
-| 9 | Service area | Reachable nodes in X minutes |
-| 10 | Waypoint routing | Multi-stop routes |
-| 11 | Traffic routing | Time-dependent costs |
-| 12 | Geometry export | GeoJSON route export |
+| # | Example | What it demonstrates |
+|---|---------|----------------------|
+| 01 | `01-dijkstra` | Shortest path by cost with `pgr_dijkstra` on a synthetic grid network |
+| 02 | `02-astar` | Heuristic shortest path with `pgr_aStar` (Euclidean distance heuristic) |
+| 03 | `03-tsp` | Traveling Salesman: visit all nodes and return with minimum cost |
+| 04 | `04-driving-distance` | Cost matrix from one origin to all reachable nodes (`pgr_drivingDistance`) |
+| 05 | `05-isochrones` | Reachability polygons — what is reachable within a cost budget |
+| 06 | `06-network-prep` | Preparing raw line data: source/target columns and `pgr_createTopology` |
+| 07 | `07-turn-restrictions` | Turn restriction table: no-left-turn / no-u-turn penalties |
+| 08 | `08-multi-criteria` | Routing on time + distance + safety with speed limits and safety scores |
+| 09 | `09-service-area` | Facility coverage: which facilities are reachable within X minutes |
+| 10 | `10-waypoint-routing` | Multi-stop routes through intermediate waypoints in optimal order |
+| 11 | `11-traffic-routing` | Time-dependent costs with a synthetic traffic multiplier table |
+| 12 | `12-geometry-export` | Exporting route geometry as GeoJSON |
 
-## Requirements
+## Repository layout
 
-- PostgreSQL 15+
-- PostGIS 3.4+
-- pgRouting 3.6+
-- Docker (for examples)
+```
+pgrouting-patterns/
+├── examples/
+│   ├── 01-dijkstra/run.sql
+│   ├── 02-astar/run.sql
+│   └── ... (one run.sql per pattern, 12 total)
+├── tests/
+│   └── test_patterns.py     # syntax/structure checks for the SQL examples
+├── docker-compose.yml       # PostgreSQL 15 + PostGIS 3.4 + pgRouting 3.6.0
+├── pyproject.toml
+├── README.md
+├── LICENSE
+└── CONTRIBUTING.md
+```
 
-## Quick start
+## Validation
 
 ```bash
-cd examples/01-dijkstra
-docker-compose up -d
-psql -f setup.sql
-psql -f query.sql
+pip install pytest
+pytest            # checks every example SQL file for valid syntax
 ```
+
+CI runs `ruff check` / `ruff format --check` on Python files and the pytest suite on every push and pull request.
+
+## Roadmap
+
+- Contraction hierarchies (`pgr_contraction`) for large-network speedups
+- K-shortest paths (`pgr_KSP`) for alternative-route generation
+- Real OSM extract walkthrough (download → osm2pgrouting → topology)
+
+## Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md). Report security issues to zqmcomputing@gmail.com — please do not open a public issue for those.
 
 ## More from this series
 
@@ -77,3 +112,8 @@ MIT — see LICENSE file.
 
 *Part of [ZQM Labs](https://github.com/ZQM-Computing) — games, gear & a little mischief.*
 
+*Part of [ZQM Computing](https://github.com/ZQM-Computing) — games, gear & a little mischief.*
+
+## License
+
+MIT — see [LICENSE](LICENSE).
