@@ -112,11 +112,12 @@ The configured CI workflow is the source of truth for automated checks. A passin
 
 ## Installation
 
-```bash
-pip install -e .
-```
+No package to install — the examples are SQL files run against the database in Docker (see Quickstart). The Python validation suite only needs pytest:
 
-Requires Python 3.11+.
+```bash
+pip install pytest
+pytest
+```
 
 *Part of [ZQM Computing](https://github.com/ZQM-Computing) — geospatial engineering, scientific computing, and infrastructure patterns.*
 
