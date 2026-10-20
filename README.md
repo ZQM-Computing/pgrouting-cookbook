@@ -36,6 +36,14 @@ psql -h localhost -U gis -d gis -f examples/01-dijkstra/run.sql
 
 Each example is a single self-contained `run.sql`: it builds a small synthetic network, runs the pgRouting function, and prints the result. Point `psql` at any example directory's `run.sql` to try it.
 
+## Usage
+
+Each pattern is a self-contained, runnable example. Start from the
+[Quickstart](#quickstart), then open any entry in the [Patterns](#patterns)
+list and run it end to end. Copy the pattern into your own project and
+swap in your data — the patterns are reference implementations, not a
+package to install.
+
 ## Patterns
 
 | # | Example | What it demonstrates |
