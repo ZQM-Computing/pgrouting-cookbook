@@ -1,5 +1,6 @@
 site_name: pgrouting-patterns
-site_description: pgRouting patterns ΓÇö shortest path, driving distance, isochrones, turn restrictions, traffic-aware routing
+site_url: https://pgrouting.zqmlabs.com/
+site_description: pgRouting patterns — shortest path, driving distance, isochrones, turn restrictions, traffic-aware routing
 site_author: ZQM Computing
 repo_url: https://github.com/ZQM-Computing/pgrouting-patterns
 
@@ -19,4 +20,3 @@ markdown_extensions:
 
 nav:
   - Home: index.md
-
