@@ -87,7 +87,7 @@ CI runs `ruff check` / `ruff format --check` on Python files and the pytest suit
 
 ## Contributing
 
-See [CONTRIBUTING.md](https://github.com/ZQM-Computing/pgrouting-patterns/blob/main/CONTRIBUTING.md). Report security issues to <zqmcomputing@gmail.com> — please do not open a public issue for those.
+See [CONTRIBUTING.md](CONTRIBUTING.md). Report security issues to <zqmcomputing@gmail.com> — please do not open a public issue for those.
 
 ## More from this series
 
