@@ -1,4 +1,4 @@
-"""Tests for pgrouting-patterns."""
+"""Tests for pgrouting-cookbook."""
 
 from pathlib import Path
 
