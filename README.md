@@ -10,6 +10,7 @@
 <!-- markdownlint-enable MD033 -->
 <!-- ZQM-END -->
 
+![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg) ![GitHub](https://img.shields.io/github/stars/ZQM-Computing/pgrouting-cookbook?style=social)
 [![CI](https://github.com/ZQM-Computing/pgrouting-patterns/actions/workflows/ci.yml/badge.svg)](https://github.com/ZQM-Computing/pgrouting-patterns/actions/workflows/ci.yml)
 
 Production-tested pgRouting patterns for PostGIS network analysis — shortest paths, driving distances, isochrones, and traffic-aware routing, all on synthetic data you can run locally.
