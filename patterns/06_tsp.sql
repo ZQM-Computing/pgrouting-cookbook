@@ -1,0 +1,5 @@
+-- Pattern 06: Traveling Salesman Problem
+-- SELECT * FROM pgr_TSP(
+--   'SELECT id, x, y FROM nodes',
+--   start_id := 1
+-- );

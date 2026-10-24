@@ -1,0 +1,6 @@
+-- Pattern 07: Vehicle Routing Problem (VRP)
+-- SELECT * FROM pgr_pickDeliver(
+--   'SELECT * FROM orders',
+--   'SELECT * FROM vehicles',
+--   'SELECT * FROM matrix'
+-- );

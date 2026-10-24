@@ -1,0 +1,5 @@
+-- Pattern 03: Dijkstra Shortest Path (full traversal)
+-- SELECT * FROM pgr_dijkstra(
+--   'SELECT id, source, target, cost, reverse_cost FROM ways',
+--   start_node, end_node, directed := true
+-- );

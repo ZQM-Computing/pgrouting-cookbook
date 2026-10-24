@@ -1,0 +1,5 @@
+-- Pattern 05: K-Shortest Paths (Yen)
+-- SELECT * FROM pgr_kShortestPath(
+--   'SELECT id, source, target, cost, reverse_cost FROM ways',
+--   start_node, end_node, K
+-- );
