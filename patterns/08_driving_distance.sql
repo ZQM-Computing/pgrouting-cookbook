@@ -1,5 +1,0 @@
--- Pattern 08: Driving Distance
--- SELECT * FROM pgr_drivingDistance(
---   'SELECT id, source, target, cost, reverse_cost FROM ways',
---   start_node, max_distance
--- );

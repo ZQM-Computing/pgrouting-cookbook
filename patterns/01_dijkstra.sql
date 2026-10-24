@@ -1,5 +1,0 @@
--- Pattern 01: Dijkstra Shortest Path
--- SELECT * FROM pgr_dijkstra(
---   'SELECT id, source, target, cost FROM edges',
---   start_node, end_node
--- );

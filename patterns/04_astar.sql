@@ -1,5 +1,0 @@
--- Pattern 04: A* Algorithm
--- SELECT * FROM pgr_aStar(
---   'SELECT id, source, target, cost, reverse_cost, x1, y1, x2, y2 FROM ways',
---   start_node, end_node
--- );
