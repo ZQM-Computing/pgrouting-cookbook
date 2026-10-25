@@ -1,6 +1,6 @@
 site_name: pgRouting Cookbook
 site_url: https://pgrouting.zqmlabs.com/
-site_description: pgRouting patterns — shortest path, driving distance, isochrones, turn restrictions, traffic-aware routing
+site_description: Runnable pgRouting and PostGIS examples for shortest paths, driving distance, isochrones, turn restrictions, and reproducible synthetic network analysis.
 site_author: ZQM Computing
 repo_url: https://github.com/ZQM-Computing/pgrouting-cookbook
 
