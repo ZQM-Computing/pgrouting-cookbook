@@ -29,14 +29,14 @@ INSERT INTO edges (id, source, target, cost, reverse_cost, x1, y1, x2, y2, geom)
 
 CREATE TEMP TABLE restrictions (
   to_cost double precision NOT NULL,
-  target_id bigint NOT NULL,
+  target_id integer NOT NULL,
   via_path text NOT NULL
 );
 -- For this synthetic graph, prohibit the transition from edge 1 to edge 2.
 INSERT INTO restrictions VALUES (-1, 2, '1');
 SELECT *
 FROM pgr_trsp(
-  'SELECT id, source, target, cost, reverse_cost FROM edges',
+  'SELECT id::integer, source::integer, target::integer, cost, reverse_cost FROM edges',
   1, 3, true, false,
   'SELECT to_cost, target_id, via_path FROM restrictions'
 )
