@@ -6,6 +6,8 @@ CREATE TABLE demo_network (
   id bigserial PRIMARY KEY,
   cost double precision NOT NULL DEFAULT 1,
   reverse_cost double precision NOT NULL DEFAULT 1,
+  source bigint,
+  target bigint,
   geom geometry(LineString, 3857) NOT NULL
 );
 INSERT INTO demo_network (geom) VALUES
