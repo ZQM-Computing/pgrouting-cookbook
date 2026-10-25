@@ -112,3 +112,36 @@ jobs:
           python-version: "3.12"
       - name: Check repository documentation
         run: python scripts/check_docs.py
+
+  sql-examples:
+    runs-on: ubuntu-latest
+    services:
+      pgrouting:
+        image: pgrouting/pgrouting:15-3.5-3.7.3
+        env:
+          POSTGRES_DB: gis
+          POSTGRES_USER: gis
+          POSTGRES_PASSWORD: gis
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U gis -d gis"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 20
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - name: Install PostgreSQL client
+        run: |
+          sudo apt-get update
+          sudo apt-get install --yes postgresql-client
+      - name: Execute every SQL example against PostgreSQL, PostGIS, and pgRouting
+        env:
+          PGPASSWORD: gis
+        run: |
+          set -euo pipefail
+          for example in examples/*/run.sql; do
+            echo "::group::${example}"
+            psql --host=127.0.0.1 --username=gis --dbname=gis --set=ON_ERROR_STOP=1 --file="${example}"
+            echo "::endgroup::"
+          done
