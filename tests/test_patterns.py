@@ -42,6 +42,19 @@ def test_sql_examples_contain_queries():
         )
 
 
+
+def test_readme_runtime_and_waypoint_claims_match_examples():
+    """Documented container versions and waypoint semantics match the source."""
+    readme = (ROOT / "README.md").read_text(encoding="utf-8")
+    compose = (ROOT / "docker-compose.yml").read_text(encoding="utf-8")
+    assert "PostGIS 3.5 + pgRouting 3.7.3" in readme
+    assert "PostGIS 3.4 + pgRouting 3.6.0" not in readme
+    assert "pgrouting/pgrouting:15-3.5-3.7.3" in compose
+    waypoint = next(line for line in readme.splitlines() if "`10-waypoint-routing`" in line)
+    assert "prescribed waypoint sequence" in waypoint
+    assert "optimal order" not in waypoint
+
+
 def test_readme_exists():
     assert (ROOT / "README.md").exists()
 
