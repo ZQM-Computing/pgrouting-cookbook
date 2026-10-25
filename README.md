@@ -31,8 +31,8 @@ GIS analysts, logistics planners, and anyone who needs routing answers out of a 
 
 ## Prerequisites
 
-- Docker and Docker Compose (recommended — the repo ships a `docker-compose.yml` with PostgreSQL 15, PostGIS 3.4, and pgRouting 3.6.0), or
-- Your own PostgreSQL 15+ with PostGIS 3.4+ and pgRouting 3.6+
+- Docker and Docker Compose (recommended — the repo ships a `docker-compose.yml` with PostgreSQL 15, PostGIS 3.5, and pgRouting 3.7.3), or
+- Your own PostgreSQL 15+ with PostGIS 3.5+ and pgRouting 3.7+
 - `psql` client
 
 ## Quickstart
