@@ -18,14 +18,14 @@ CREATE TEMP TABLE edges (
 );
 
 INSERT INTO edges (id, source, target, cost, reverse_cost, x1, y1, x2, y2, geom) VALUES
-  (1, 1, 2, 1.0, 1.0, 0, 0, 1, 0, ST_MakeLine(ST_Point(0,0), ST_Point(1,0))),
-  (2, 2, 3, 1.0, 1.0, 1, 0, 2, 0, ST_MakeLine(ST_Point(1,0), ST_Point(2,0))),
-  (3, 1, 4, 1.4, 1.4, 0, 0, 0, 1, ST_MakeLine(ST_Point(0,0), ST_Point(0,1))),
-  (4, 4, 3, 1.0, 1.0, 0, 1, 2, 0, ST_MakeLine(ST_Point(0,1), ST_Point(2,0))),
-  (5, 2, 5, 1.0, 1.0, 1, 0, 1, 1, ST_MakeLine(ST_Point(1,0), ST_Point(1,1))),
-  (6, 5, 6, 1.0, 1.0, 1, 1, 2, 1, ST_MakeLine(ST_Point(1,1), ST_Point(2,1))),
-  (7, 6, 3, 1.0, 1.0, 2, 1, 2, 0, ST_MakeLine(ST_Point(2,1), ST_Point(2,0))),
-  (8, 4, 5, 1.0, 1.0, 0, 1, 1, 1, ST_MakeLine(ST_Point(0,1), ST_Point(1,1)));
+  (1, 1, 2, 1.0, 1.0, 0, 0, 1, 0, ST_SetSRID(ST_MakeLine(ST_Point(0,0), ST_Point(1,0))),
+  (2, 2, 3, 1.0, 1.0, 1, 0, 2, 0, ST_SetSRID(ST_MakeLine(ST_Point(1,0), ST_Point(2,0))),
+  (3, 1, 4, 1.4, 1.4, 0, 0, 0, 1, ST_SetSRID(ST_MakeLine(ST_Point(0,0), ST_Point(0,1))),
+  (4, 4, 3, 1.0, 1.0, 0, 1, 2, 0, ST_SetSRID(ST_MakeLine(ST_Point(0,1), ST_Point(2,0))),
+  (5, 2, 5, 1.0, 1.0, 1, 0, 1, 1, ST_SetSRID(ST_MakeLine(ST_Point(1,0), ST_Point(1,1))),
+  (6, 5, 6, 1.0, 1.0, 1, 1, 2, 1, ST_SetSRID(ST_MakeLine(ST_Point(1,1), ST_Point(2,1))),
+  (7, 6, 3, 1.0, 1.0, 2, 1, 2, 0, ST_SetSRID(ST_MakeLine(ST_Point(2,1), ST_Point(2,0))),
+  (8, 4, 5, 1.0, 1.0, 0, 1, 1, 1, ST_SetSRID(ST_MakeLine(ST_Point(0,1), ST_Point(1,1)));
 
 CREATE TEMP TABLE restrictions (
   to_cost double precision NOT NULL,
@@ -34,7 +34,7 @@ CREATE TEMP TABLE restrictions (
 );
 -- For this synthetic graph, prohibit the transition from edge 1 to edge 2.
 INSERT INTO restrictions VALUES (-1, 2, '1');
-SELECT seq, path_seq, node, edge, cost, agg_cost
+SELECT *
 FROM pgr_trsp(
   'SELECT id, source, target, cost, reverse_cost FROM edges',
   1, 3, true, false,
