@@ -9,7 +9,7 @@ WITH cost_matrix AS (
     (4, 1, 5.0), (4, 2, 2.0), (4, 3, 4.0)
   ) AS m(start_vid, end_vid, agg_cost)
 )
-SELECT seq, node, edge, cost, agg_cost
+SELECT seq, node, cost, agg_cost
 FROM pgr_TSP(
   'SELECT start_vid, end_vid, agg_cost FROM (VALUES
     (1::bigint, 2::bigint, 4.0::float8),
