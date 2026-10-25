@@ -13,7 +13,7 @@
 ![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg) ![GitHub](https://img.shields.io/github/stars/ZQM-Computing/pgrouting-cookbook?style=social)
 [![CI](https://github.com/ZQM-Computing/pgrouting-cookbook/actions/workflows/ci.yml/badge.svg)](https://github.com/ZQM-Computing/pgrouting-cookbook/actions/workflows/ci.yml)
 
-Production-tested pgRouting patterns for PostGIS network analysis — shortest paths, driving distances, isochrones, and traffic-aware routing, all on synthetic data you can run locally.
+Runnable pgRouting examples for PostGIS network analysis. The SQL examples use deterministic synthetic networks; their runtime behavior is checked against PostgreSQL, PostGIS, and pgRouting in CI.
 
 ## Repository role and status
 
@@ -63,13 +63,13 @@ package to install.
 | 02 | `02-astar` | Heuristic shortest path with `pgr_aStar` (Euclidean distance heuristic) |
 | 03 | `03-tsp` | Traveling Salesman: visit all nodes and return with minimum cost |
 | 04 | `04-driving-distance` | Cost matrix from one origin to all reachable nodes (`pgr_drivingDistance`) |
-| 05 | `05-isochrones` | Reachability polygons — what is reachable within a cost budget |
+| 05 | `05-isochrones` | Cost-budget reachability plus an approximate convex-hull envelope (not a network-distance polygon) |
 | 06 | `06-network-prep` | Preparing raw line data: source/target columns and `pgr_createTopology` |
-| 07 | `07-turn-restrictions` | Turn restriction table: no-left-turn / no-u-turn penalties |
-| 08 | `08-multi-criteria` | Routing on time + distance + safety with speed limits and safety scores |
+| 07 | `07-turn-restrictions` | Prohibited edge-transition example using `pgr_trsp` restrictions |
+| 08 | `08-multi-criteria` | Illustrative weighted cost combining speed-derived travel cost and a safety penalty |
 | 09 | `09-service-area` | Facility coverage: which facilities are reachable within X minutes |
 | 10 | `10-waypoint-routing` | Multi-stop routes through intermediate waypoints in optimal order |
-| 11 | `11-traffic-routing` | Time-dependent costs with a synthetic traffic multiplier table |
+| 11 | `11-traffic-routing` | Traffic-adjusted costs using a synthetic multiplier table (single snapshot, not a time-dependent model) |
 | 12 | `12-geometry-export` | Exporting route geometry as GeoJSON |
 
 ## Repository layout
@@ -81,7 +81,7 @@ pgrouting-cookbook/
 │   ├── 02-astar/run.sql
 │   └── ... (one run.sql per pattern, 12 total)
 ├── tests/
-│   └── test_patterns.py     # syntax/structure checks for the SQL examples
+│   └── test_patterns.py     # exact inventory and non-vacuous structural checks
 ├── docker-compose.yml       # PostgreSQL 15 + PostGIS 3.4 + pgRouting 3.6.0
 ├── pyproject.toml
 ├── README.md
@@ -93,7 +93,8 @@ pgrouting-cookbook/
 
 ```bash
 pip install pytest
-pytest            # checks every example SQL file for valid syntax
+pytest            # checks the exact example inventory and basic SQL structure
+# The CI sql-examples job executes every script against the pinned pgRouting container
 ```
 
 CI runs `ruff check` / `ruff format --check` on Python files and the pytest suite on every push and pull request.
