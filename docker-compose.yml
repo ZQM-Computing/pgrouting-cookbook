@@ -1,7 +1,7 @@
 version: "3.8"
 services:
   pgrouting:
-    image: pgrouting/pgrouting:15-3.4-3.6.0
+    image: pgrouting/pgrouting:15-3.5-3.7.3
     environment:
       POSTGRES_DB: gis
       POSTGRES_USER: gis
