@@ -1,3 +1,6 @@
+Title: pgRouting Cookbook
+Description: Runnable pgRouting and PostGIS examples for shortest paths, driving distance, isochrones, turn restrictions, and reproducible synthetic network analysis.
+
 # pgRouting Patterns
 
 <!-- ZQM-START -->
