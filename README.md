@@ -13,7 +13,7 @@
 ![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg) ![GitHub](https://img.shields.io/github/stars/ZQM-Computing/pgrouting-cookbook?style=social)
 [![CI](https://github.com/ZQM-Computing/pgrouting-cookbook/actions/workflows/ci.yml/badge.svg)](https://github.com/ZQM-Computing/pgrouting-cookbook/actions/workflows/ci.yml)
 
-Runnable pgRouting examples for PostGIS network analysis. The SQL examples use deterministic synthetic networks; their runtime behavior is checked against PostgreSQL, PostGIS, and pgRouting in CI.
+Runnable pgRouting and PostGIS network-analysis examples for shortest paths, driving distance, isochrones, turn restrictions, and routing costs. Deterministic synthetic networks exercise the documented SQL against PostgreSQL, PostGIS, and pgRouting in CI; real-world route safety and accessibility require separate evidence.
 
 ## Repository role and status
 
