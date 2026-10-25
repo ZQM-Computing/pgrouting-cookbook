@@ -68,7 +68,7 @@ package to install.
 | 07 | `07-turn-restrictions` | Prohibited edge-transition example using `pgr_trsp` restrictions |
 | 08 | `08-multi-criteria` | Illustrative weighted cost combining speed-derived travel cost and a safety penalty |
 | 09 | `09-service-area` | Facility coverage: which facilities are reachable within X minutes |
-| 10 | `10-waypoint-routing` | Multi-stop routes through intermediate waypoints in optimal order |
+| 10 | `10-waypoint-routing` | Multi-stop routes through a prescribed waypoint sequence, with each leg routed separately |
 | 11 | `11-traffic-routing` | Traffic-adjusted costs using a synthetic multiplier table (single snapshot, not a time-dependent model) |
 | 12 | `12-geometry-export` | Exporting route geometry as GeoJSON |
 
@@ -82,7 +82,7 @@ pgrouting-cookbook/
 │   └── ... (one run.sql per pattern, 12 total)
 ├── tests/
 │   └── test_patterns.py     # exact inventory and non-vacuous structural checks
-├── docker-compose.yml       # PostgreSQL 15 + PostGIS 3.4 + pgRouting 3.6.0
+├── docker-compose.yml       # PostgreSQL 15 + PostGIS 3.5 + pgRouting 3.7.3
 ├── pyproject.toml
 ├── README.md
 ├── LICENSE
