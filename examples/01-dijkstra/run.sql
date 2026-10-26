@@ -31,3 +31,27 @@ FROM pgr_dijkstra(
   1, 3, directed := true
 )
 ORDER BY seq;
+
+-- Pin the expected shortest route so the live PostGIS/pgRouting CI job
+-- fails if costs, directionality, or the synthetic network changes silently.
+DO $$
+DECLARE
+  actual_nodes bigint[];
+  actual_cost double precision;
+BEGIN
+  SELECT array_agg(node ORDER BY path_seq), max(agg_cost)
+  INTO actual_nodes, actual_cost
+  FROM pgr_dijkstra(
+    'SELECT id, source, target, cost, reverse_cost FROM edges',
+    1, 3, directed := true
+  );
+
+  IF actual_nodes IS DISTINCT FROM ARRAY[1, 2, 3]::bigint[] THEN
+    RAISE EXCEPTION 'Expected shortest route [1,2,3], got %', actual_nodes;
+  END IF;
+
+  IF actual_cost IS DISTINCT FROM 2.0::double precision THEN
+    RAISE EXCEPTION 'Expected shortest-route cost 2.0, got %', actual_cost;
+  END IF;
+END
+$$;

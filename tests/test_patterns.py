@@ -55,6 +55,16 @@ def test_readme_runtime_and_waypoint_claims_match_examples():
     assert "optimal order" not in waypoint
 
 
+
+def test_dijkstra_example_pins_expected_route_and_cost():
+    """The Dijkstra SQL must assert the synthetic network's known shortest path."""
+    sql = (EXAMPLES_DIR / "01-dijkstra" / "run.sql").read_text(encoding="utf-8")
+    assert "Expected shortest route [1,2,3]" in sql
+    assert "ARRAY[1, 2, 3]::bigint[]" in sql
+    assert "Expected shortest-route cost 2.0" in sql
+    assert "actual_cost IS DISTINCT FROM 2.0::double precision" in sql
+
+
 def test_readme_exists():
     assert (ROOT / "README.md").exists()
 
