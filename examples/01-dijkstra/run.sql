@@ -25,11 +25,17 @@ INSERT INTO edges (id, source, target, cost, reverse_cost, x1, y1, x2, y2, geom)
   (7, 6, 3, 1.0, 1.0, 2, 1, 2, 0, ST_SetSRID(ST_MakeLine(ST_Point(2,1), ST_Point(2,0)),3857)),
   (8, 4, 5, 1.0, 1.0, 0, 1, 1, 1, ST_SetSRID(ST_MakeLine(ST_Point(0,1), ST_Point(1,1)),3857));
 
-SELECT seq, path_seq, node, edge, cost, agg_cost
+-- Materialize the routing result once so display and correctness checks reuse
+-- the same graph traversal instead of executing pgr_dijkstra twice.
+CREATE TEMP TABLE dijkstra_result AS
+SELECT *
 FROM pgr_dijkstra(
   'SELECT id, source, target, cost, reverse_cost FROM edges',
   1, 3, directed := true
-)
+);
+
+SELECT seq, path_seq, node, edge, cost, agg_cost
+FROM dijkstra_result
 ORDER BY seq;
 
 -- Pin the expected shortest route so the live PostGIS/pgRouting CI job
@@ -41,10 +47,7 @@ DECLARE
 BEGIN
   SELECT array_agg(node ORDER BY path_seq), max(agg_cost)
   INTO actual_nodes, actual_cost
-  FROM pgr_dijkstra(
-    'SELECT id, source, target, cost, reverse_cost FROM edges',
-    1, 3, directed := true
-  );
+  FROM dijkstra_result;
 
   IF actual_nodes IS DISTINCT FROM ARRAY[1, 2, 3]::bigint[] THEN
     RAISE EXCEPTION 'Expected shortest route [1,2,3], got %', actual_nodes;
