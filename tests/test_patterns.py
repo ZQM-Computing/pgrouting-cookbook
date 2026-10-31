@@ -63,6 +63,9 @@ def test_dijkstra_example_pins_expected_route_and_cost():
     assert "ARRAY[1, 2, 3]::bigint[]" in sql
     assert "Expected shortest-route cost 2.0" in sql
     assert "actual_cost IS DISTINCT FROM 2.0::double precision" in sql
+    assert "CREATE TEMP TABLE dijkstra_result AS" in sql
+    assert sql.count("pgr_dijkstra(") == 1
+    assert "FROM dijkstra_result" in sql
 
 
 def test_readme_exists():
