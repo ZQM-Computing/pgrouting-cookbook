@@ -58,7 +58,7 @@ package to install.
 ## Patterns
 
 | # | Example | What it demonstrates |
-|---|---------|----------------------|
+| --- | --------- | ---------------------- |
 | 01 | `01-dijkstra` | Shortest path by cost with `pgr_dijkstra` on a synthetic grid network |
 | 02 | `02-astar` | Heuristic shortest path with `pgr_aStar` (Euclidean distance heuristic) |
 | 03 | `03-tsp` | Traveling Salesman: visit all nodes and return with minimum cost |
