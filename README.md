@@ -146,16 +146,3 @@ pytest
 ## License
 
 MIT — see [LICENSE](LICENSE).
-
-<!-- ZQM-FOOTER-START -->
-<!-- markdownlint-disable MD033 -->
----
-
-<p align="center">
-  <em>Play more. Plan less.</em><br>
-  <a href="https://zqmlabs.com">zqmlabs.com</a> •
-  <a href="https://github.com/ZQM-Labs">ZQM Labs</a> •
-  <a href="https://github.com/ZQM-Computing">ZQM Computing</a>
-</p>
-<!-- markdownlint-enable MD033 -->
-<!-- ZQM-FOOTER-END -->
