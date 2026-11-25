@@ -130,7 +130,7 @@ jobs:
           POSTGRES_USER: gis
           POSTGRES_PASSWORD: gis
         ports:
-          - 5432:5432
+          - 5432
         options: >-
           --health-cmd "pg_isready -U gis -d gis"
           --health-interval 5s
@@ -149,6 +149,6 @@ jobs:
           set -euo pipefail
           for example in examples/*/run.sql; do
             echo "::group::${example}"
-            psql --host=127.0.0.1 --username=gis --dbname=gis --set=ON_ERROR_STOP=1 --file="${example}"
+            psql --host=127.0.0.1 --port=${{ job.services.pgrouting.ports[5432] }} --username=gis --dbname=gis --set=ON_ERROR_STOP=1 --file="${example}"
             echo "::endgroup::"
           done
